@@ -10,7 +10,6 @@ class LandingPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: Column(
             children: [
               FutureBuilder(
@@ -18,13 +17,19 @@ class LandingPage extends StatelessWidget {
                 builder: (context, asyncSnapshot) {
                   return Material(
                     elevation: 3.0,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20.0),
+                      bottomRight: Radius.circular(20.0),
+                    ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20.0),
+                        bottomRight: Radius.circular(20.0),
+                      ),
                       child: Image.network(
                         asyncSnapshot.data!,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height / 1.7,
+                        height: MediaQuery.of(context).size.height / 1.6,
                         fit: BoxFit.cover,
                       ),
                     ),
