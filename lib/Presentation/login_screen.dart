@@ -1,11 +1,11 @@
 import 'dart:ui';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app_using_newsapi_key/Core/core.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:news_app_using_newsapi_key/Presentation/home_screen.dart';
 import 'package:news_app_using_newsapi_key/Infrastructure/db_functions.dart';
 import 'package:news_app_using_newsapi_key/Model/news_list_model/user_model.dart';
-import 'package:news_app_using_newsapi_key/Presentation/home_screen.dart';
 import 'package:news_app_using_newsapi_key/Presentation/registration_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -125,12 +125,17 @@ class LoginScreen extends StatelessWidget {
                                   passwordController.text,
                                 ),
                               );
+
+                              if (!context.mounted) return;
+
                               if (flag == true) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text('Login Successful')),
                                 );
 
                                 final user = await loadUser(currentUserId!);
+
+                                if (!context.mounted) return;
 
                                 Navigator.of(context).push(
                                   MaterialPageRoute(

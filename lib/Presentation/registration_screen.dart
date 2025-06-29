@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_import
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -140,6 +142,8 @@ class RegistrationScreen extends StatelessWidget {
                                     onPressed: () {},
                                   ),
                                 );
+
+                                if (!context.mounted) return;
 
                                 if (success == true) {
                                   Navigator.of(context).pop();

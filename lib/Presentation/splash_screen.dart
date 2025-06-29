@@ -6,10 +6,14 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 6), () {
-      Navigator.of(
-        context,
-      ).push(MaterialPageRoute(builder: (context) => LandingPage()));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 6), () {
+        if (context.mounted) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => LandingPage()),
+          );
+        }
+      });
     });
 
     return SafeArea(

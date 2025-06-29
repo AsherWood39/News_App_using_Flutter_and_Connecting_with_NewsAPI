@@ -32,31 +32,29 @@ class CategoryNews extends StatelessWidget {
           elevation: 16.0,
           centerTitle: true,
         ),
-        body: Container(
-          child: ValueListenableBuilder(
-            valueListenable: categoryNewsNotifier,
-            builder: (context, newCategoryData, child) {
-              if (newCategoryData.isEmpty) {
-                return Center(child: Text('No data Available'));
-              }
+        body: ValueListenableBuilder(
+          valueListenable: categoryNewsNotifier,
+          builder: (context, newCategoryData, child) {
+            if (newCategoryData.isEmpty) {
+              return Center(child: Text('No data Available'));
+            }
 
-              return ListView.builder(
-                shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final catergoryData = newCategoryData[index];
+            return ListView.builder(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemBuilder: (context, index) {
+                final categoryData = newCategoryData[index];
 
-                  return ShowCategory(
-                    image: catergoryData.urlToImage ?? '',
-                    title: catergoryData.title ?? '',
-                    desc: catergoryData.description ?? '',
-                    url: catergoryData.url ?? '',
-                  );
-                },
-                itemCount: newCategoryData.length,
-              );
-            },
-          ),
+                return ShowCategory(
+                  image: categoryData.urlToImage ?? '',
+                  title: categoryData.title ?? '',
+                  desc: categoryData.description ?? '',
+                  url: categoryData.url ?? '',
+                );
+              },
+              itemCount: newCategoryData.length,
+            );
+          },
         ),
       ),
     );

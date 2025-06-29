@@ -54,8 +54,8 @@ class HomeScreen extends StatelessWidget {
                         final categoryData = newCategory[index];
 
                         return CategoryTile(
-                          image: categoryData.image,
-                          categoryName: categoryData.categoryName,
+                          image: categoryData.image!,
+                          categoryName: categoryData.categoryName!,
                         );
                       },
                       itemCount: newCategory.length,
@@ -308,8 +308,8 @@ Future<void> _launchInWebView(Uri url) async {
 }
 
 class CategoryTile extends StatelessWidget {
-  final image, categoryName;
-  const CategoryTile({super.key, this.image, this.categoryName});
+  String image, categoryName;
+  CategoryTile({super.key, required this.image, required this.categoryName});
 
   @override
   Widget build(BuildContext context) {
@@ -368,7 +368,7 @@ class CarouselIndexProvider extends ChangeNotifier {
 }
 
 class BreakingNews extends StatelessWidget {
-  BreakingNews({super.key});
+  const BreakingNews({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -393,72 +393,62 @@ class BreakingNews extends StatelessWidget {
           elevation: 16.0,
           centerTitle: true,
         ),
-        body: Container(
-          child: ValueListenableBuilder(
-            valueListenable: sliderNotifier,
-            builder: (context, newSliderData, child) {
-              if (newSliderData.isEmpty) {
-                return Center(child: Text('No data Available'));
-              }
+        body: ValueListenableBuilder(
+          valueListenable: sliderNotifier,
+          builder: (context, newSlider, child) {
+            if (newSlider.isEmpty) {
+              return Center(child: Text('No data Available'));
+            }
 
-              return ValueListenableBuilder(
-                valueListenable: sliderNotifier,
-                builder: (context, newSlider, child) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final sliderData = newSlider[index];
+            return ListView.builder(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemBuilder: (context, index) {
+                final sliderData = newSlider[index];
 
-                      return GestureDetector(
-                        onTap: () =>
-                            _launchInWebView(Uri.parse(sliderData.url ?? '')),
-                        child: Container(
-                          margin: EdgeInsets.all(16.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  sliderData.urlToImage ??
-                                      'https://www.pngmart.com/files/11/WWW-PNG-Image.png',
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 200,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              SizedBox(height: 6),
-                              Text(
-                                sliderData.title ?? '',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                sliderData.description ?? '',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16.0,
-                                ),
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
+                return GestureDetector(
+                  onTap: () =>
+                      _launchInWebView(Uri.parse(sliderData.url ?? '')),
+                  child: Container(
+                    margin: EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.network(
+                            sliderData.urlToImage ??
+                                'https://www.pngmart.com/files/11/WWW-PNG-Image.png',
+                            width: MediaQuery.of(context).size.width,
+                            height: 200,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                      );
-                    },
-                    itemCount: newSliderData.length,
-                  );
-                },
-              );
-            },
-          ),
+                        SizedBox(height: 6),
+                        Text(
+                          sliderData.title ?? '',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 17.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          sliderData.description ?? '',
+                          style: TextStyle(color: Colors.black, fontSize: 16.0),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              itemCount: newSlider.length,
+            );
+          },
         ),
       ),
     );
@@ -466,7 +456,7 @@ class BreakingNews extends StatelessWidget {
 }
 
 class TrendingNews extends StatelessWidget {
-  TrendingNews({super.key});
+  const TrendingNews({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -491,66 +481,60 @@ class TrendingNews extends StatelessWidget {
           elevation: 16.0,
           centerTitle: true,
         ),
-        body: Container(
-          child: ValueListenableBuilder(
-            valueListenable: newsNotifier,
-            builder: (context, newNews, child) {
-              if (newNews.isEmpty) {
-                return Center(child: Text('No data Available'));
-              }
-              return ListView.builder(
-                shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
-                itemCount: newNews.length,
-                itemBuilder: (context, index) {
-                  final newsData = newNews[index];
+        body: ValueListenableBuilder(
+          valueListenable: newsNotifier,
+          builder: (context, newNews, child) {
+            if (newNews.isEmpty) {
+              return Center(child: Text('No data Available'));
+            }
+            return ListView.builder(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemCount: newNews.length,
+              itemBuilder: (context, index) {
+                final newsData = newNews[index];
 
-                  return GestureDetector(
-                    onTap: () =>
-                        _launchInWebView(Uri.parse(newsData.url ?? '')),
-                    child: Container(
-                      margin: EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.network(
-                              newsData.urlToImage ??
-                                  'https://www.pngmart.com/files/11/WWW-PNG-Image.png',
-                              width: MediaQuery.of(context).size.width,
-                              height: 200,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          SizedBox(height: 6),
-                          Text(
-                            newsData.title ?? '',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            newsData.description ?? '',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16.0,
-                            ),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
+                return GestureDetector(
+                  onTap: () => _launchInWebView(Uri.parse(newsData.url ?? '')),
+                  child: Container(
+                    margin: EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                  );
-                },
-              );
-            },
-          ),
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.network(
+                            newsData.urlToImage ??
+                                'https://www.pngmart.com/files/11/WWW-PNG-Image.png',
+                            width: MediaQuery.of(context).size.width,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        SizedBox(height: 6),
+                        Text(
+                          newsData.title ?? '',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 17.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          newsData.description ?? '',
+                          style: TextStyle(color: Colors.black, fontSize: 16.0),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
         ),
       ),
     );
