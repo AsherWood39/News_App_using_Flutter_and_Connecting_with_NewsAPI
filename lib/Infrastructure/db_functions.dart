@@ -48,7 +48,6 @@ Future<bool> addUser(UserModel u) async {
     }
     return Future.value(false);
   } catch (e) {
-    print('addUser error: $e');
     return Future.value(false);
   }
 }
