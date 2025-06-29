@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:news_app_using_newsapi_key/API/api.dart';
@@ -13,6 +16,18 @@ Future<void> getAllNewsInNotifier(String? categoryName) async {
 
   final categoryData = await getAllNewsForCategory(categoryName!);
   categoryNewsNotifier.value = categoryData.articles ?? [];
+}
+
+Future<String> fetchBingImageUrl() async {
+  final bingImageModel = await loadBingImage();
+  final imageList = bingImageModel.images ?? [];
+
+  if (imageList.isEmpty) {
+    throw Exception('No images found.');
+  }
+
+  final randomIndex = Random().nextInt(imageList.length);
+  return 'https://www.bing.com${imageList[randomIndex].url}';
 }
 
 Future<bool> addUser(UserModel u) async {

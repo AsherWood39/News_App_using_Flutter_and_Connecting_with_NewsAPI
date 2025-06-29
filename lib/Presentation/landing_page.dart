@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_using_newsapi_key/Infrastructure/db_functions.dart';
 import 'package:news_app_using_newsapi_key/Presentation/login_screen.dart';
 
 class LandingPage extends StatelessWidget {
@@ -12,20 +13,25 @@ class LandingPage extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: Column(
             children: [
-              Material(
-                elevation: 3.0,
-                borderRadius: BorderRadius.circular(20),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/Business.jpg',
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 1.7,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              FutureBuilder(
+                future: fetchBingImageUrl(),
+                builder: (context, asyncSnapshot) {
+                  return Material(
+                    elevation: 3.0,
+                    borderRadius: BorderRadius.circular(20),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(
+                        asyncSnapshot.data!,
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height / 1.7,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                },
               ),
-              SizedBox(height: 10.0),
+              SizedBox(height: 18.0),
               Text(
                 'News from around the',
                 style: TextStyle(
