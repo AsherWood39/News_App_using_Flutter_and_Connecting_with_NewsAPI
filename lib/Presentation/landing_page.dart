@@ -19,7 +19,6 @@ class LandingPage extends StatelessWidget {
                       ConnectionState.waiting) {
                     return SizedBox(
                       height: MediaQuery.of(context).size.height / 1.7,
-                      child: Center(child: CircularProgressIndicator()),
                     );
                   } else if (asyncSnapshot.hasError || !asyncSnapshot.hasData) {
                     return SizedBox(
