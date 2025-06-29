@@ -15,6 +15,19 @@ class LandingPage extends StatelessWidget {
               FutureBuilder(
                 future: fetchBingImageUrl(),
                 builder: (context, asyncSnapshot) {
+                  if (asyncSnapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height / 1.7,
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  } else if (asyncSnapshot.hasError || !asyncSnapshot.hasData) {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height / 1.7,
+                      child: Center(child: Text('Image failed to load')),
+                    );
+                  }
+
                   return Material(
                     elevation: 3.0,
                     borderRadius: BorderRadius.only(
