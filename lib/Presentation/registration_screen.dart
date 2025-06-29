@@ -70,6 +70,7 @@ class RegistrationScreen extends StatelessWidget {
                           hintText: 'Name',
                           hintStyle: TextStyle(color: Colors.red.shade50),
                         ),
+                        style: TextStyle(color: Colors.white),
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
@@ -88,6 +89,7 @@ class RegistrationScreen extends StatelessWidget {
                           hintText: 'Email',
                           hintStyle: TextStyle(color: Colors.red.shade50),
                         ),
+                        style: TextStyle(color: Colors.white),
                       ),
                       const SizedBox(height: 12),
                       TextFormField(
@@ -106,6 +108,7 @@ class RegistrationScreen extends StatelessWidget {
                           hintText: 'Password',
                           hintStyle: TextStyle(color: Colors.red.shade50),
                         ),
+                        style: TextStyle(color: Colors.white),
                       ),
                       const SizedBox(height: 10),
                       Row(
