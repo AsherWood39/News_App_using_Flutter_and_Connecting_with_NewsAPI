@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app_using_newsapi_key/Core/core.dart';
 import 'package:news_app_using_newsapi_key/Infrastructure/db_functions.dart';
@@ -24,7 +25,7 @@ class LoginScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(
+                  image: CachedNetworkImageProvider(
                     'https://img.freepik.com/free-photo/creative-abstract-pastel-background_23-2151954516.jpg?uid=R180870269&ga=GA1.1.1023686332.1750686394&w=740',
                   ),
                 ),
@@ -131,12 +132,12 @@ class LoginScreen extends StatelessWidget {
 
                                 final user = await loadUser(currentUserId!);
 
-                                // Navigator.of(context).push(
-                                //   MaterialPageRoute(
-                                //     builder: (context) =>
-                                //         HomeScreen(user: user),
-                                //   ),
-                                // );
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        HomeScreen(user: user),
+                                  ),
+                                );
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

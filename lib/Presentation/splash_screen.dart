@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_using_newsapi_key/Presentation/login_screen.dart';
+import 'package:news_app_using_newsapi_key/Presentation/landing_page.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(const Duration(seconds: 6), () {
       Navigator.of(
         context,
-      ).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+      ).push(MaterialPageRoute(builder: (context) => LandingPage()));
     });
 
     return SafeArea(

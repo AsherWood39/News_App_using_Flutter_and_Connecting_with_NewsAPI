@@ -4,9 +4,15 @@ import 'package:news_app_using_newsapi_key/API/api.dart';
 import 'package:news_app_using_newsapi_key/Core/core.dart';
 import 'package:news_app_using_newsapi_key/Model/news_list_model/user_model.dart';
 
-Future<void> getAllNewsInNotifier() async {
+Future<void> getAllNewsInNotifier(String? categoryName) async {
   final newsData = await getAllNews();
   newsNotifier.value = newsData.articles ?? [];
+
+  final sliderData = await getAllNewsForSlider();
+  sliderNotifier.value = sliderData.articles ?? [];
+
+  final categoryData = await getAllNewsForCategory(categoryName!);
+  categoryNewsNotifier.value = categoryData.articles ?? [];
 }
 
 Future<bool> addUser(UserModel u) async {

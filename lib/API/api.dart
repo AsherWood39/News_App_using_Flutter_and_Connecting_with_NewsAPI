@@ -14,3 +14,27 @@ Future<NewsListModel> getAllNews() async {
 
   return NewsListModel.fromJson(result);
 }
+
+Future<NewsListModel> getAllNewsForSlider() async {
+  final response = await http.get(
+    Uri.parse(
+      'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=f9bdc8057813417cab0b5021b8ba033c',
+    ),
+  );
+
+  final result = jsonDecode(response.body) as Map<String, dynamic>;
+
+  return NewsListModel.fromJson(result);
+}
+
+Future<NewsListModel> getAllNewsForCategory(String category) async {
+  final response = await http.get(
+    Uri.parse(
+      'https://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=f9bdc8057813417cab0b5021b8ba033c',
+    ),
+  );
+
+  final result = jsonDecode(response.body) as Map<String, dynamic>;
+
+  return NewsListModel.fromJson(result);
+}
