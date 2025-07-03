@@ -21,7 +21,6 @@ class LoginScreen extends StatelessWidget {
     final imageUrl =
         'https://img.freepik.com/free-photo/creative-abstract-pastel-background_23-2151954516.jpg?uid=R180870269&ga=GA1.1.1023686332.1750686394&w=740';
     final proxiedImageUrl = '$proxyUrl${Uri.encodeComponent(imageUrl)}';
-    print('Image URLS : $proxiedImageUrl');
 
     return SafeArea(
       child: Scaffold(

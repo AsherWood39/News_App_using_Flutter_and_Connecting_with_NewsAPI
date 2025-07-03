@@ -1,0 +1,20 @@
+{
+  "name": "news_app_using_flutter_and_connecting_with_newsapi",
+  "version": "1.0.0",
+  "description": "A Flutter project that connects to NewsAPI to implement a news app",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
