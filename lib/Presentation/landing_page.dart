@@ -24,7 +24,6 @@ class LandingPage extends StatelessWidget {
                     child: Center(child: Text('Image failed to load')),
                   );
                 }
-
                 return Material(
                   elevation: 3.0,
                   borderRadius: BorderRadius.only(

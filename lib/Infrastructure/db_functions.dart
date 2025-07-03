@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
 import 'package:news_app_using_newsapi_key/API/api.dart';
 import 'package:news_app_using_newsapi_key/Core/core.dart';
+import 'package:news_app_using_newsapi_key/Model/bing_image_model/bing_image_model.dart';
 import 'package:news_app_using_newsapi_key/Model/news_list_model/user_model.dart';
 
 Future<void> getAllNewsInNotifier(String? categoryName) async {
@@ -19,7 +22,21 @@ Future<void> getAllNewsInNotifier(String? categoryName) async {
 }
 
 Future<String> fetchBingImageUrl() async {
-  final bingImageModel = await loadBingImage();
+  final proxyUrl = 'https://api.allorigins.win/raw?url=';
+  final bingUrl =
+      'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=en-US';
+
+  final encodedBingUrl = Uri.encodeComponent(bingUrl);
+
+  final response = await http.get(Uri.parse('$proxyUrl$encodedBingUrl'));
+
+  if (response.statusCode != 200) {
+    throw Exception('Failed to load Bing image data');
+  }
+
+  final result = jsonDecode(response.body) as Map<String, dynamic>;
+  final bingImageModel = BingImageModel.fromJson(result);
+
   final imageList = bingImageModel.images ?? [];
 
   if (imageList.isEmpty) {
