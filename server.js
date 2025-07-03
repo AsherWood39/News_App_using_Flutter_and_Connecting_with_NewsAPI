@@ -45,23 +45,3 @@ app.get('/category-news', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-
-app.get('/image-proxy', async (req, res) => {
-  const imageUrl = req.query.url;
-
-  if (!imageUrl) {
-    return res.status(400).json({ error: 'Missing image URL' });
-  }
-
-  try {
-    const response = await axios.get(imageUrl, {
-      responseType: 'stream', // needed for images
-    });
-
-    // Set the same content type as the image
-    res.setHeader('Content-Type', response.headers['content-type']);
-    response.data.pipe(res); // Stream image back to client
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch image' });
-  }
-});
