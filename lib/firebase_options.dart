@@ -59,4 +59,5 @@ class DefaultFirebaseOptions {
     projectId: 'user-registration-95c25',
     storageBucket: 'user-registration-95c25.firebasestorage.app',
   );
+
 }
