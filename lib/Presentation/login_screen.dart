@@ -17,10 +17,10 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final proxyUrl = 'https://api.allorigins.win/raw?url=';
     final imageUrl =
         'https://img.freepik.com/free-photo/creative-abstract-pastel-background_23-2151954516.jpg?uid=R180870269&ga=GA1.1.1023686332.1750686394&w=740';
-    final proxiedImageUrl = '$proxyUrl${Uri.encodeComponent(imageUrl)}';
+    final proxiedImageUrl =
+        'https://your-node-server.com/image-proxy?url=${Uri.encodeComponent(imageUrl)}';
 
     return SafeArea(
       child: Scaffold(
