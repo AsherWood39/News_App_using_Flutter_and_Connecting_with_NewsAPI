@@ -17,29 +17,17 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -58,6 +46,44 @@ class DefaultFirebaseOptions {
     messagingSenderId: '910861388870',
     projectId: 'user-registration-95c25',
     storageBucket: 'user-registration-95c25.firebasestorage.app',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyA2_cRPyAhi46liTv7nlTaz96jS0g7vuls',
+    appId: '1:910861388870:web:ca495a8f59b1d879ed8e47',
+    messagingSenderId: '910861388870',
+    projectId: 'user-registration-95c25',
+    authDomain: 'user-registration-95c25.firebaseapp.com',
+    storageBucket: 'user-registration-95c25.firebasestorage.app',
+    measurementId: 'G-8VNZRXMN08',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDPreKxFPEKULoawvh4Zi8kIb476UIUyDA',
+    appId: '1:910861388870:ios:8097c6f968359defed8e47',
+    messagingSenderId: '910861388870',
+    projectId: 'user-registration-95c25',
+    storageBucket: 'user-registration-95c25.firebasestorage.app',
+    iosBundleId: 'com.example.newsAppUsingNewsapiKey',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDPreKxFPEKULoawvh4Zi8kIb476UIUyDA',
+    appId: '1:910861388870:ios:8097c6f968359defed8e47',
+    messagingSenderId: '910861388870',
+    projectId: 'user-registration-95c25',
+    storageBucket: 'user-registration-95c25.firebasestorage.app',
+    iosBundleId: 'com.example.newsAppUsingNewsapiKey',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyA2_cRPyAhi46liTv7nlTaz96jS0g7vuls',
+    appId: '1:910861388870:web:652e5ed43e57fa38ed8e47',
+    messagingSenderId: '910861388870',
+    projectId: 'user-registration-95c25',
+    authDomain: 'user-registration-95c25.firebaseapp.com',
+    storageBucket: 'user-registration-95c25.firebasestorage.app',
+    measurementId: 'G-B00HYS7J4F',
   );
 
 }
