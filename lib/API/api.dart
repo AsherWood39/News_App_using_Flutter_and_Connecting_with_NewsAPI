@@ -5,35 +5,30 @@ import 'package:news_app_using_newsapi_key/Model/bing_image_model/bing_image_mod
 import 'package:news_app_using_newsapi_key/Model/news_list_model/news_list_model.dart';
 
 Future<NewsListModel> getAllNews() async {
-  final res = await http.get(Uri.parse('http://localhost:3000/news'));
-  return NewsListModel.fromJson(jsonDecode(res.body));
+  final response = await http.get(Uri.parse('http://localhost:3000/news'));
+
+  final result = jsonDecode(response.body) as Map<String, dynamic>;
+
+  return NewsListModel.fromJson(result);
 }
 
 Future<NewsListModel> getAllNewsForSlider() async {
   final response = await http.get(
-    Uri.parse(
-      'http://localhost:3000/slider-news',
-    ), // Use deployed URL if hosted
+    Uri.parse('http://localhost:3000/slider-news'),
   );
 
-  if (response.statusCode != 200) {
-    throw Exception('Failed to load slider news: ${response.body}');
-  }
-
   final result = jsonDecode(response.body) as Map<String, dynamic>;
+
   return NewsListModel.fromJson(result);
 }
 
 Future<NewsListModel> getAllNewsForCategory(String category) async {
   final response = await http.get(
-    Uri.parse('http://localhost:3000/category-news?category=$category'),
+    Uri.parse('http://localhost:3000/category-news'),
   );
 
-  if (response.statusCode != 200) {
-    throw Exception('Failed to load category news: ${response.body}');
-  }
-
   final result = jsonDecode(response.body) as Map<String, dynamic>;
+
   return NewsListModel.fromJson(result);
 }
 
