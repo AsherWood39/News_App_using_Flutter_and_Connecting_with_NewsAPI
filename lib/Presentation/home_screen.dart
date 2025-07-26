@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Flutter'),
+              Text('Newsly'),
               Text(
                 'News',
                 style: TextStyle(
